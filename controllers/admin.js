@@ -1,6 +1,4 @@
 import { Book } from "../models/products.js";
-import { User } from "../models/user.js";
-import fs from "fs";
 
 import { validationResult } from "express-validator";
 import { deleteFileImage } from "../util/fileDelete.js";
@@ -259,6 +257,8 @@ export const deleteBookAsync = async (req, res, next) => {
   const bookId = req.params.bookId;
   // const userId = req.user._id;
   // console.log(userId);
+
+  console.log(bookId);
 
   try {
     const book = await Book.findOneAndDelete({
