@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Literary Treasures</title>
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/admin.css" />
+    <link rel="stylesheet" href="/styles/shop.css" />
+    <link rel="stylesheet" href="/styles/others.css" />
+
+    <script src="/js/main.js" defer></script>
+  </head>
+  <body>
+    <header class="header">
+
+      <div class="mobile-menu">
+        <ion-icon class="icon-menu" name="menu-outline"></ion-icon>
+        <ion-icon class="close-icon close" name="close-outline"></ion-icon>
+      </div>
+
+      <nav class="header-nav">
+        <ul class="header-lists">
+          <li class="header-item">
+            <a class="header-item_logo " href="/">
+              <img class="book-logo" src="/logoImg/bookLogo2.png" alt="logo">
+              
+            <h1 class="shop-name">Literary Treasures</h1>
+            </a>
+          </li>
+          <li class="header-item header-item-first">
+            <a class="header-item_link <%= path === "/" ? "active" : ""  %> " href="/">Shop</a>
+          </li>
+          <li class="header-item">
+            <a class="header-item_link <%= path=== "/books" ? "active" : ""  %> " href="/books">Books</a>
+          </li>
+          <% if(locals.isAuthenticated) {%>
+
+          <li class="header-item">
+            <a class="header-item_link <%= path=== "/cart" ? "active" : ""  %> " href="/cart">Cart</a>
+          </li>
+          <li class="header-item">
+            <a class="header-item_link <%= path=== "/orders" ? "active" : ""  %> " href="/orders">Orders</a>
+          </li>
+          <li class="header-item">
+            <a class="header-item_link <%= path=== "/admin" ? "active" : ""  %>" href="/admin/add-book"
+              >Add-Books</a
+            >
+          </li>
+          <li class="header-item">
+            <a class="header-item_link <%= path=== "/admin/books" ? "active" : ""  %>" href="/admin/books"
+              >Admin</a
+            >
+          </li>
+          <% } %>
+        </ul>
+        
+        <div class="login-logout">
+          <% if(!locals.isAuthenticated) {%>
+          <form class="delete" action="/login" method="get">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn" type="submit">Login</button>
+          </form>
+          <form class="delete" action="/signup" method="get">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn signup-btn" type="submit">sign up</button>
+          </form>
+          <% } else{ %>
+          <form class="delete" action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button class="btn logout" type="submit">Logout</button>
+          </form>
+          <% } %>
+        </div>
+
+      </nav>
+    </header>
+ 
+

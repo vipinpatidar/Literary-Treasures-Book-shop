@@ -1,0 +1,21 @@
+<%- include("../partials/header.ejs") %>
+
+<main class="main-section">
+
+  <h1 class="admin-heading"><%= pageTitle %></h1>
+  
+  <% if(errorMessage) {%>
+ <p class="message error"><%= errorMessage %></p>
+ <% } %>
+  <form action="/reset" method="post" class="admin-form login-form">
+         <label for="email">Your Email</label>
+         <input type="email" name="email"  id="email" placeholder="Your Email Address..." required></input>
+
+ <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+         <button class="btn" type="submit">Submit Email</button>
+
+      </form>
+
+   </main>
+   
+<%- include("../partials/footer.ejs")  %>

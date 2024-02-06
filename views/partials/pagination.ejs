@@ -1,0 +1,14 @@
+<section class="pagination-section">
+  
+    <a class="pagination-btn prev-btn <%= currentPage !== 1 ? "" : "disable" %>"  href="?page=<%= previousPage %>"
+       ><ion-icon name="chevron-back-outline"></ion-icon
+    ></a>
+
+    <a class="pagination-btn current-page" 
+      ><%= currentPage %></a
+    >
+
+    <a class="pagination-btn next-btn <%= hasNextPage ? "" : "disable" %>"  href="?page=<%= nextPage %>">
+      <ion-icon name="chevron-forward-outline"></ion-icon
+    ></a>
+  </section>

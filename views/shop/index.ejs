@@ -1,0 +1,53 @@
+<%- include("../partials/header.ejs") %>
+
+<main class="main-section-shop">
+  <h1 class="admin-heading">Welcome To Books Store</h1>
+  <% if(prods.length > 0) { %>
+  <div class="grid">
+    <% prods.forEach( prod => { %>
+
+    <article class="card product-item">
+      <header class="card__header">
+        <h1 class="product__title"><%= prod.title %></h1>
+      </header>
+      <div class="card__image">
+        <img src="<%= prod.image %>" alt="A Book" />
+      </div>
+      <div class="card__content">
+        <h2 class="product__price">$<%= prod.price %></h2>
+        <p class="product__description">
+          <%= prod.description.length > 80 ?
+          `${prod.description.slice(0,70)}...` : prod.description %>
+        </p>
+      </div>
+
+      <% if(locals.isAuthenticated) {%>
+      <form action="/add-to-cart" method="post" class="card__actions">
+        <button class="btn">Add to Cart</button>
+        <input type="hidden" name="bookId" value="<%= prod._id %>" />
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      </form>
+      <% }else { %>
+      <form action="/login" method="get" class="card__actions">
+        <button class="btn">Add to Cart</button>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      </form>
+
+      <% } %> <%#
+      <!--  include("../partials/add-to-cart.ejs", {prod: prod}) -->
+      %>
+    </article>
+
+    <% }) %>
+  </div>
+
+  <%- include("../partials/pagination.ejs") %> <% } else{ %>
+  <div class="no-prods">
+    <h1>No Books</h1>
+    <p>Add Some Books :)</p>
+    <a class="btn-link btn" href="/admin/add-book">Go To Admin</a>
+  </div>
+  <% } %>
+</main>
+
+<%- include("../partials/footer.ejs") %>

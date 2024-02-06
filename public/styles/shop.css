@@ -1,0 +1,148 @@
+.main-section-shop {
+  padding: 2rem;
+  text-align: center;
+  color: #555;
+  font-size: 1.2rem;
+  max-width: 1100px;
+  min-height: 95vh;
+  margin: 0 auto;
+
+  @media (max-width: 770px) {
+    padding: 1rem;
+    margin: 4rem auto 2rem;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  column-gap: 1.6rem;
+  row-gap: 1.6rem;
+  align-items: center;
+  margin-block: 1.6rem;
+
+  @media (max-width: 568px) {
+    justify-items: center;
+  }
+}
+
+.card {
+  background-color: #333;
+  color: #fff;
+  @media (max-width: 568px) {
+    width: 345px;
+  }
+}
+.card__header {
+  background-color: #1c1c1c;
+  padding: 0.8rem 0.6rem;
+
+  & h1 {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+
+    @media (max-width: 768px) {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.card__image {
+  width: 100%;
+  padding-inline: 0.8rem;
+  /* background-color: #eee; */
+  & img {
+    width: 100%;
+    aspect-ratio: 1/1;
+    display: block;
+  }
+}
+
+.card__content {
+  padding: 0.5rem 0.8rem 0.8rem;
+  background-color: #1c1c1c;
+
+  .product__price {
+    font-size: 2.4rem;
+    font-weight: 100;
+    color: #eee;
+    margin-bottom: 0.6rem;
+
+    @media (max-width: 768px) {
+      font-size: 2.2rem;
+    }
+  }
+  .product__description {
+    font-size: 0.95rem;
+    color: #ccc;
+    font-family: sans-serif;
+  }
+}
+
+.card__actions {
+  padding: 0.4rem 0rem 1.4rem;
+  background-color: #1c1c1c;
+}
+
+.no-prods {
+  text-align: center;
+  margin-top: 4rem;
+  background-color: #d2e0fb;
+  padding: 1.4rem;
+
+  & h1 {
+    color: #444;
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  & p {
+    color: #666;
+  }
+
+  .btn-link {
+    display: inline-block;
+    margin-top: 1rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+}
+
+.checkout-left {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  margin: 1rem auto;
+
+  gap: 3rem;
+  padding: 0.8rem;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+
+  .checkout-img {
+    width: 35px;
+    & img {
+      width: 100%;
+      display: block;
+    }
+
+    @media (max-width: 770px) {
+      width: 55px;
+    }
+  }
+
+  .checkout-headings {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    & h1 {
+      font-size: 1.8rem;
+    }
+
+    @media (max-width: 770px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
+    }
+  }
+}

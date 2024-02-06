@@ -1,0 +1,58 @@
+<%- include("../partials/header.ejs") %>
+
+<main class="main-section">
+
+  <h1 class="admin-heading"><%= pageTitle %></h1>
+  
+  <% if(errorMessage) {%>
+ <p class="message error"><%= errorMessage %></p>
+ <% } %>
+ 
+  <form action="/login" method="post" class="admin-form login-form" >
+         <label for="email">Your Email</label>
+         <input 
+         class="<%= validateErrorMsg.find(err => err.path === "email") ? "invalid" : "" %>" 
+         type="email" 
+         name="email"  
+         id="email" 
+         placeholder="Your Email Address..."
+         value="<%= oldInputValue.email %>"  
+         required></input>
+
+        <label for="password">Your Password</label>
+         <input 
+         class="<%= validateErrorMsg.find(err => err.path === "password") ? "invalid" : "" %>" 
+         type="password" 
+         name="password"  
+         id="password" placeholder="Your Password..." 
+         value="<%= oldInputValue.password %>" 
+         required></input>
+
+         <div class="reset-password">
+            <a href="/reset">Forget Password?</a>
+         </div>
+
+       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+         <button class="btn" type="submit">Login</button>
+
+         <div class="guest-user" id="guest-user">Login As Guest User</div>
+
+         <div class="signup-text">
+            <p>Don't have an account? <a href="/signup">Sign Up</a></p>
+         </div>
+      </form>
+
+      <div>
+         <script>
+            let guestBtn = document.getElementById("guest-user");
+
+      guestBtn.addEventListener("click", function () {
+       document.getElementById("email").value ="guestuser@gmail.com"
+       document.getElementById("password").value = "guest123"
+      });
+         </script>
+      </div>
+
+   </main>
+   
+<%- include("../partials/footer.ejs")  %>

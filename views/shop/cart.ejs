@@ -1,0 +1,73 @@
+<%- include("../partials/header.ejs") %>
+
+<main class="main-section_details cart-section">
+  <div class="cart-main_heading">
+    <h1 class="admin-heading">Store Cart</h1>
+  </div>
+
+  <% if(locals.cartBooks.length > 0){ %>
+  <div class="cart-totalPrice">
+    <h2>TOTAL PRICE</h2>
+    <h1>$<%= totalPrice.toFixed(2) %></h1>
+  </div>
+  <div class="cart-flex">
+    <% cartBooks.forEach(book =>{ %>
+    <div class="cartItem-flex">
+      <div class="cartItem-left">
+        <div class="cartItem-img">
+          <img src="<%= book.image %>" alt="<%= book.title %>" />
+        </div>
+        <div class="cartItem-headings">
+          <h1><%= book.title %></h1>
+          <p>$<%= book.price * book.quantity %></p>
+        </div>
+      </div>
+
+      <div class="cartItem-form">
+        <div class="cartItem-incDec">
+          <form class="plus" action="/add-to-cart" method="post">
+            <button class="btn" type="submit">+</button>
+            <input type="hidden" name="bookId" value="<%= book._id %>" />
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          </form>
+
+          <p class="qty"><%= book.quantity %></p>
+
+          <form class="mins" action="/cart-removeOne-item" method="post">
+            <button class="btn" type="submit">-</button>
+            <input type="hidden" name="bookId" value="<%= book._id %>" />
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+          </form>
+        </div>
+
+        <form class="delete" action="/cart-delete-item" method="post">
+          <button class="btn" type="submit">delete</button>
+          <input type="hidden" name="bookId" value="<%= book._id %>" />
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+        </form>
+      </div>
+    </div>
+
+    <% }) %>
+  </div>
+  <div class="cart-checkout">
+    <!-- <form class="order" action="/create-order" method="post">
+      <button class="btn" type="submit">Order Now</button>
+      <input type="hidden" name="_csrf" value="<= csrfToken %>" />
+    </form> -->
+
+    <form class="order" action="/checkout" method="get">
+      <button class="btn" type="submit">Place Order</button>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+    </form>
+  </div>
+  <% } else{ %>
+  <div class="no-prods">
+    <h1>No Books In Cart</h1>
+    <p>Add Some Books :)</p>
+    <a class="btn-link btn" href="/books">Go To Books</a>
+  </div>
+  <% } %>
+</main>
+
+<%- include("../partials/footer.ejs") %>

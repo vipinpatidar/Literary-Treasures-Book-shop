@@ -1,0 +1,27 @@
+<%- include("../partials/header.ejs") %>
+
+<main class="main-section_details">
+  <div class="details">
+    <div class="details-heading">
+      <h1><%= product.title %></h1>
+    </div>
+    <img class="details-img" src="<%= product.image %>" alt="" />
+    <div class="details-bottom">
+      <div class="details-price">
+        <p>$<%= product.price %></p>
+      </div>
+      <div class="details-des">
+        <p><%= product.description %></p>
+      </div>
+      <% if(locals.isAuthenticated) {%>
+      <form action="/add-to-cart" method="post" class="details-cart_form">
+        <button class="btn">Add to Cart</button>
+        <input type="hidden" name="bookId" value="<%= product._id %>" />
+         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      </form>
+      <% } %>
+    </div>
+  </div>
+</main>
+
+<%- include("../partials/footer.ejs") %>

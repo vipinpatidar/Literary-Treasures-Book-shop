@@ -1,0 +1,65 @@
+<%- include("../partials/header.ejs") %>
+
+<main class="main-section_details order-section">
+  <h1 class="admin-heading">Books Orders</h1>
+
+  <% if( orders.length <= 0){ %>
+
+  <div class="no-prods">
+    <h1>No Order Yet!</h1>
+    <p>Order Some Books :)</p>
+    <a class="btn-link btn" href="/books">Go To Books</a>
+  </div>
+
+  <% } else { %>
+  <ul class="orderId-list">
+    <% orders.forEach(order => { %>
+
+    <li class="orderId-item">
+      <div class="orderId-heading">
+        <h1>Id</h1>
+        <h1 class="order-id">#<%= order._id %></h1>
+      </div>
+      <div class="invoice">
+        <h2>Invoice</h2>
+        <a class="btn-invoice" target="_blank" href="/orders/<%= order._id %>"
+          >Download</a
+        >
+      </div>
+      <div class="orderBook-table">
+        <h2>Book Title</h2>
+        <h2>Quantity</h2>
+      </div>
+
+      <ul class="orderBook-list">
+        <% order.items.forEach(book => { %>
+        <li class="orderBook-item">
+          <p><%= book.title %></p>
+          <p><%= book.quantity %></p>
+        </li>
+        <% }) %>
+      </ul>
+    </li>
+
+    <% }) %>
+  </ul>
+  <div class="cart-totalPrice">
+    <h2>TOTAL PRICE</h2>
+
+    <h1>$<%= totalPrice.toFixed(2) %></h1>
+
+    <div class="orders-btns">
+      <form class="delete" action="/clear-orders" method="post">
+        <button class="btn clear-orders" type="submit">Clear All</button>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+      </form>
+      <!-- <form class="delete" action="/checkout" method="get">
+        <button class="btn Checkout-btn" type="submit">Checkout</button>
+        <input type="hidden" name="_csrf" value="<= csrfToken %>" />
+      </form> -->
+    </div>
+  </div>
+  <% } %>
+</main>
+
+<%- include("../partials/footer.ejs") %>

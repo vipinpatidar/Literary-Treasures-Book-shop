@@ -1,0 +1,56 @@
+<%- include("../partials/header.ejs") %>
+
+<main class="main-section_details cart-section">
+  <div class="cart-main_heading">
+    <h1 class="admin-heading">Checkout Now</h1>
+  </div>
+
+  <% if(locals.cartBooks.length > 0){ %> <% cartBooks.forEach(book =>{ %>
+  <div class="checkout-left">
+    <div class="checkout-img">
+      <img src="<%= book.image %>" alt="<%= book.title %>" />
+    </div>
+    <div class="checkout-headings">
+      <h1><%= book.title %></h1>
+      <p>Price: $<%= book.price * book.quantity %></p>
+      <p>Quantity: <%= book.quantity %></p>
+    </div>
+  </div>
+  <% } )%>
+  <div class="checkout-note">
+    <span class="checkout-note-heading"
+      >Note <span class="checkout-note-star">*</span></span
+    >:
+    <p>
+      Please Choose other country if you are an indian. In india pay method not
+      work. This website is only for learning purpose.
+    </p>
+  </div>
+  <div class="cart-totalPrice">
+    <h2>TOTAL PRICE</h2>
+    <h1>$<%= totalPrice.toFixed(2) %></h1>
+    <button class="btn Checkout-btn" id="checkout-btn" type="submit">
+      Checkout
+    </button>
+  </div>
+
+  <div>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+      var stripe = Stripe(
+        "pk_test_51NxkghSFVsf2tYsVrNKNkUsB26cLoxvdGQzGNf36q3ksgctWyYdISpmkJYpHirqoiX7kIY8dFYjiQCn9e5F6uUw0003hc4e2RT"
+      );
+
+      let checkoutBtn = document.getElementById("checkout-btn");
+
+      checkoutBtn.addEventListener("click", function () {
+        stripe.redirectToCheckout({
+          sessionId: "<%= sessionId %>",
+        });
+      });
+    </script>
+  </div>
+  <% }%>
+</main>
+
+<%- include("../partials/footer.ejs") %>

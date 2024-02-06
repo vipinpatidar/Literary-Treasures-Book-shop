@@ -1,0 +1,107 @@
+<%- include("../partials/header.ejs")  %>
+
+<main class="main-section">
+ <h1 class="admin-heading"><%= pageTitle %></h1>
+
+ <% if(errorMessage) {%>
+ <p class="message error"><%= errorMessage %></p>
+ <% } %>
+
+<% if(locals.isEditing) { %>
+
+      <form action="/admin/edit-books" method="post" class="admin-form" enctype="multipart/form-data">
+         <label for="title">Book Title</label>
+         <input 
+         class="<%= validateErrorMsg.find(err => err.path === "title") ? "invalid" : "" %>"  
+         type="text" name="title" 
+         value="<%= product.title %>"  
+         id="title" placeholder="Book Title..." required></input>
+
+        <%# 
+        <label for="image">Book Image Url</label>
+         <input 
+         class="validateErrorMsg.find(err => err.path === "image") ? "invalid" : ""  
+         type="text" name="image" 
+         value="product.image"  
+         id="image" placeholder="Book Image Url..." required></input> 
+         %> 
+
+         <label for="image">Book Image</label>
+         <input 
+         type="file" name="image" 
+         id="image" class="image-file" ></input> 
+
+         <label for="price">Book Price</label>
+         <input 
+         class="<%= validateErrorMsg.find(err => err.path === "price") ? "invalid" : "" %>"  
+         type="number" step="0.01" name="price" 
+         value="<%= product.price %>"   
+         id="price" placeholder="Book Price..." required></input>
+
+         <label for="description">Book Description</label>
+         <textarea 
+         class="<%= validateErrorMsg.find(err => err.path === "description") ? "invalid" : "" %>"  
+         cols="30" rows="6" 
+         name="description"  id="description" placeholder="Book Description..."  required><%= product.description %></textarea>
+
+         <input type="hidden" name="id" value="<%= product._id %>">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
+         <button class="btn" type="submit"><%= btnTxt %></button>
+      </form>
+ 
+<% } else {  %>
+   
+      <form action="/admin/add-books" method="post" class="admin-form" enctype="multipart/form-data">
+         <label for="title">Book Title</label>
+         <input 
+         class="<%= validateErrorMsg.find(err => err.path === "title") ? "invalid" : "" %>"  
+         type="text" 
+         name="title"  
+         id="title" 
+         placeholder="Book Title..." 
+         value="<%= oldInputValue.title %>"  
+         required></input>
+
+       <%#  <label for="image">Book Image Url</label>
+         <input 
+         class=" validateErrorMsg.find(err => err.path === "image") ? "invalid" : """  
+         type="text" 
+         name="image"  
+         id="image" 
+         placeholder="Book Image Url..."
+         value="oldInputValue.image" required></input> %>
+
+         <label for="image">Book Image Upload</label>
+         <input 
+         type="file" name="image" 
+         id="image" class="image-file" required></input> 
+
+         <label for="price">Book Price</label>
+         <input 
+         class="<%= validateErrorMsg.find(err => err.path === "price") ? "invalid" : "" %>"  
+         type="number" 
+         name="price" 
+         step="0.01"  
+         id="price" 
+         placeholder="Book Price..." 
+         value="<%= oldInputValue.price %>" required></input>
+
+         <label for="description">Book Description</label>
+         <textarea 
+         class="<%= validateErrorMsg.find(err => err.path === "description") ? "invalid" : "" %>"  
+         cols="30" rows="6" 
+         name="description"  
+         id="description" 
+         placeholder="Book Description..."  required><%= oldInputValue.description %></textarea>
+
+
+ <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+         <button class="btn" type="submit"><%= btnTxt %></button>
+      </form>
+      
+      <% } %>
+   </main>
+   
+  
+<%- include("../partials/footer.ejs")  %>
