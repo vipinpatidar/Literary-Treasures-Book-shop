@@ -184,7 +184,7 @@ export const postRemoveOneToCart = async (req, res, next) => {
 export const postDeleteCartItem = async (req, res, next) => {
   try {
     const bookId = req.body.bookId;
-    // console.log(bookId);
+
     await req.user.deleteCartItem(bookId);
 
     res.redirect("/cart");

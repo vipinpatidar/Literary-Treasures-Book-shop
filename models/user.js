@@ -87,7 +87,9 @@ userSchema.methods.deleteCartItem = function (id) {
     (item) => item.bookId.toString() !== id.toString()
   );
 
-  this.cart = updatedCartItems;
+  this.cart = {
+    items: updatedCartItems,
+  };
 
   return this.save();
 };
