@@ -14,9 +14,7 @@ const BOOKS_PER_PAGE = 3;
 
 //adding secret key to stripe
 
-const stripe = Stripe(
-  "sk_test_51NxkghSFVsf2tYsVsfSy8UdQ3bzbUICvDN2ib0qIfUIcHLmjtQaFT6LFIX8fWySG87HMvtuSJVELWi5vPtJH9Txz00j7GacYBN"
-);
+const stripe = Stripe(process.env.STRIPE_KEY);
 
 // shop folder requests
 
