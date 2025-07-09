@@ -53,6 +53,7 @@ export const getIndex = async (req, res, next) => {
 
 export const getBooks = async (req, res, next) => {
   const pageNo = +req.query.page ? +req.query.page : 1;
+  console.log(req.headers.origin)
   try {
     const numberOfBooks = await Book.find().countDocuments();
 
